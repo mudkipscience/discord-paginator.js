@@ -13,13 +13,14 @@ const BasePaginator = require('discord-paginator.js')
 
 const pages = ['foo', 'bar'] //return foo at the first page, and bar at the second page
 
-const paginator = new BasePaginator({
+const Paginator = new BasePaginator({
     pages: pages, //the pages
     timeout: 120000, //the timeout for the reaction collector ended (in ms)
+    page: 'Page {current}/{total}', //Show the page counter to the message
     filter: (reaction, user) => user.id == message.author.id //to filter the reaction collector
 })
 
-paginator.spawn(message.channel) //to spawn the paginator to specific text channel
+Paginator.spawn(message.channel) //to spawn the paginator to specific text channel
 ```
 
 # Explanation
@@ -31,7 +32,7 @@ const Paginator = new BasePaginator({
     reaction: [String, String], //The emoji to move previous or next page
     removeReaction: Boolean, //Remove the user reaction when used
     removeAtEnd: Boolean, //Remove the reactions when the reaction collector is ended
-    pageCount: Boolean, //Show the page counter to the message
+    pageCount: String, //Show the page counter to the message
     timeout: Number, //The timeout for the reaction collector ended (in ms)
     filter: Function //An additional filter for the paginator
 })

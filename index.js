@@ -3,7 +3,7 @@ let djs
 try {
     djs = require('discord.js')
 } catch {
-    throw new Error('Paginator', 'Please install discord.js package manually')
+    throw new Error('Paginator: ' + 'Please install discord.js package manually')
 }
 
 const defaultOpts = {
@@ -13,7 +13,7 @@ const defaultOpts = {
 	reaction: ['⬅️', '➡️'],
 	removeReaction: true,
 	removeAtEnd: true,
-	pageCount: true,
+	pageCount: 'Page {current}/{total}',
 	timeout: 60000,
 	filter: (reaction, user) => true
 }
@@ -40,22 +40,22 @@ class Paginator {
 		const pages = [...this.pages]
 		let page = 0
 
-		if (!pages.length) throw new Error('Paginator', 'Empty pages')
+		if (!pages.length) throw new Error('Paginator: ' + 'Empty pages')
 
-		if (opts.pageCount) {
+		if (typeof opts.pageCount == 'string') {
 			for (let i = 0; i < pages.length; i++) {
-				if (pages[i] instanceof djs.MessageEmbed) pages[i].setFooter(`Page ${i + 1}/${pages.length}`)
-				else if (typeof pages[i] == 'string') pages[i] = `Page ${i + 1}/${pages.length}\n${pages[i]}`
+				if (pages[i] instanceof djs.MessageEmbed) pages[i].setFooter(opts.pageCount.replace(/\{current\}/g, i).replace(/\{total\}/g, pages.length))
+				else if (typeof pages[i] == 'string') pages[i] = `${opts.pageCount.replace(/\{current\}/g, i).replace(/\{total\}/g, pages.length)}\n${pages[i]}`
 			}
 		}
 
 		let message = await channel.send(pages[page])
 
-		if (!Array.isArray(opts.reaction) || opts.reaction.length < 2) throw new Error('Paginator', 'Must be two reactions given in \'reaction\' options')
+		if (!Array.isArray(opts.reaction) || opts.reaction.length < 2) throw new Error('Paginator: ' + 'Must be two reactions given in \'reaction\' options')
 
-		if (typeof opts.filter != 'function') throw new Error('Paginator', 'Expecting a function in \'filter\' options')
+		if (typeof opts.filter != 'function') throw new Error('Paginator: ' + 'Expecting a function in \'filter\' options')
 
-		if (opts.timeout < 1000 || opts.timeout > 259200000) throw new Error('Paginator', 'Spawner timeout must be between 1 second and 3 days')
+		if (opts.timeout < 1000 || opts.timeout > 259200000) throw new Error('Paginator: ' + 'Spawner timeout must be between 1 second and 3 days')
 
 		const reactions = {}
 
@@ -98,7 +98,7 @@ class Paginator {
 
 				await message.edit(pages[page])
 			} else if (reactions.remove && reaction.emoji.toString() == reactions.remove.emoji.toString()) {
-				collector.stop('Remove Message')
+				collector.stop('123M0V3')
 
 				return
 			} else if (reaction.emoji.toString() == reactions.left.emoji.toString()) {
@@ -119,13 +119,13 @@ class Paginator {
 		})
 
 		collector.on('end', async (collected, reason) => {
-			if (opts.removeAtEnd && reason != 'Remove Message') {
+			if (opts.removeAtEnd && reason != '123M0V3') {
 				for (const reaction of Object.values(reactions)) {
 					await reaction.remove().catch(none)
 				}
 			}
 
-			if (reason == 'Remove Message') await message.delete()
+			if (reason == '123M0V3') await message.delete()
 		})
 	}
 }
