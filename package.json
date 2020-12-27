@@ -1,5 +1,5 @@
 {
-  "name": "discord-paginator",
+  "name": "discordjs-paginator",
   "version": "1.0.0",
   "description": "A lightweight package to paginate discord message for discord bots",
   "main": "index.js",
@@ -20,7 +20,7 @@
   "license": "MIT",
   "repository": {
 	"type": "git",
-	"url": "https://github.com/XzFirzal/discord-paginator"
+	"url": "https://github.com/XzFirzal/discord.js-paginator"
   },
-  "homepage": "https://github.com/XzFirzal/discord-paginator"
+  "homepage": "https://github.com/XzFirzal/discord.js-paginator"
 }

@@ -1,4 +1,4 @@
-# discord-paginator
+# discordjs-paginator
 A lightweight package to paginate discord message for discord bots with ease!
 
 # How to use? easy!
