@@ -44,8 +44,8 @@ class Paginator {
 
 		if (typeof opts.pageCount == 'string') {
 			for (let i = 0; i < pages.length; i++) {
-				if (pages[i] instanceof djs.MessageEmbed) pages[i].setFooter(opts.pageCount.replace(/\{current\}/g, i).replace(/\{total\}/g, pages.length))
-				else if (typeof pages[i] == 'string') pages[i] = `${opts.pageCount.replace(/\{current\}/g, i).replace(/\{total\}/g, pages.length)}\n${pages[i]}`
+				if (pages[i] instanceof djs.MessageEmbed) pages[i].setFooter(opts.pageCount.replace(/\{current\}/g, i + 1).replace(/\{total\}/g, pages.length))
+				else if (typeof pages[i] == 'string') pages[i] = `${opts.pageCount.replace(/\{current\}/g, i + 1).replace(/\{total\}/g, pages.length)}\n${pages[i]}`
 			}
 		}
 
