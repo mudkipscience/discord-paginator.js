@@ -1,15 +1,15 @@
-# discordjs-menus
+# discord-paginator.js
 A lightweight package to paginate discord message for discord bots with ease!
 
 # How to use? easy!
 # Install using NPM
 ```properties
-npm install discordjs-menus
+npm install discord-paginator.js
 ```
 
 # Example
 ```js
-const BasePaginator = require('discordjs-menus')
+const BasePaginator = require('discord-paginator.js')
 
 const pages = ['foo', 'bar'] //return foo at the first page, and bar at the second page
 
