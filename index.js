@@ -13,7 +13,6 @@ const defaultOpts = {
 	reaction: ['⬅️', '➡️'],
 	removeReaction: true,
 	removeAtEnd: true,
-	pageCount: 'Page {current}/{total}',
 	timeout: 60000,
 	filter: (reaction, user) => true
 }
@@ -33,7 +32,6 @@ class Paginator {
 			reaction: this.reaction,
 			removeReaction: this.removeReaction,
 			removeAtEnd: this.removeAtEnd,
-			pageCount: this.pageCount,
 			timeout: this.timeout,
 			filter: this.filter
 		}
@@ -41,13 +39,6 @@ class Paginator {
 		let page = 0
 
 		if (!pages.length) throw new Error('Paginator: ' + 'Empty pages')
-
-		if (typeof opts.pageCount == 'string') {
-			for (let i = 0; i < pages.length; i++) {
-				if (pages[i] instanceof djs.MessageEmbed) pages[i].setFooter(opts.pageCount.replace(/\{current\}/g, i + 1).replace(/\{total\}/g, pages.length))
-				else if (typeof pages[i] == 'string') pages[i] = `${opts.pageCount.replace(/\{current\}/g, i + 1).replace(/\{total\}/g, pages.length)}\n${pages[i]}`
-			}
-		}
 
 		let message = await channel.send(pages[page])
 
